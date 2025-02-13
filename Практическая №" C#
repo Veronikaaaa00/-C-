@@ -5,23 +5,28 @@ public class Rectangle
     private double length;
     private double width;
 
-    public Rectangle() // к по умолчанию 
+    static Rectangle() //статический
     {
-        length = 1.0; 
-        width = 1.0;  
+        Console.WriteLine("Статический конструктор Rectangle вызван.");
     }
 
-    public Rectangle(double length, double width) //к с параметрами
+    public Rectangle() //по умолчанию
     {
-        this.Length = length; 
-        this.Width = width;   
+        length = 5.0;
+        width = 5.0;
     }
 
-    public Rectangle(Rectangle rectangle) // к копирования
+    public Rectangle(double length, double width) //по параметрам
     {
-        this.Length = rectangle.length; 
-        this.Width = rectangle.Width;   
+        this.Length = length;
+        this.Width = width;
     }
+    public Rectangle(Rectangle rectangle) // копирование
+    {
+        this.Length = rectangle.Length;
+        this.Width = rectangle.Width;
+    }
+
     public double Length
     {
         get { return length; }
@@ -42,17 +47,16 @@ public class Rectangle
             if (value > 0)
                 width = value;
             else
-                throw new ArgumentException("Ширина должна быть положительной.");
+                throw new ArgumentException("Ширина должна быть положительная.");
         }
     }
 
-    public double CalculateArea() //вычисляем площадь
+    public double CalculateArea()
     {
         return Length * Width;
     }
 
-    // Деструктор
-    ~Rectangle()
+    ~Rectangle() //деструктор
     {
         Console.WriteLine("Прямоугольник уничтожен.");
     }
@@ -62,7 +66,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        Rectangle rect1 = new Rectangle(3, 4);
+        Rectangle rect1 = new Rectangle(4, 4);
         Console.WriteLine("Площадь прямоугольника: " + rect1.CalculateArea());
 
         Rectangle rect2 = new Rectangle(rect1);
