@@ -1,0 +1,74 @@
+using System;
+
+public class Rectangle
+{
+    private double length;
+    private double width;
+
+    public Rectangle() // к по умолчанию 
+    {
+        length = 1.0; 
+        width = 1.0;  
+    }
+
+    public Rectangle(double length, double width) //к с параметрами
+    {
+        this.Length = length; 
+        this.Width = width;   
+    }
+
+    public Rectangle(Rectangle rectangle) // к копирования
+    {
+        this.Length = rectangle.length; 
+        this.Width = rectangle.Width;   
+    }
+    public double Length
+    {
+        get { return length; }
+        set
+        {
+            if (value > 0)
+                length = value;
+            else
+                throw new ArgumentException("Длина должна быть положительной.");
+        }
+    }
+
+    public double Width
+    {
+        get { return width; }
+        set
+        {
+            if (value > 0)
+                width = value;
+            else
+                throw new ArgumentException("Ширина должна быть положительной.");
+        }
+    }
+
+    public double CalculateArea() //вычисляем площадь
+    {
+        return Length * Width;
+    }
+
+    // Деструктор
+    ~Rectangle()
+    {
+        Console.WriteLine("Прямоугольник уничтожен.");
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Rectangle rect1 = new Rectangle(3, 4);
+        Console.WriteLine("Площадь прямоугольника: " + rect1.CalculateArea());
+
+        Rectangle rect2 = new Rectangle(rect1);
+        Console.WriteLine("Площадь копии прямоугольника: " + rect2.CalculateArea());
+
+        Rectangle rect3 = new Rectangle();
+        Console.WriteLine("Площадь прямоугольника по умолчанию: " + rect3.CalculateArea());
+    }
+}
